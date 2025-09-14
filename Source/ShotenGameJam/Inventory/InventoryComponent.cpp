@@ -35,5 +35,18 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 void UInventoryComponent::AddItem(FName Id, int32 Quantity)
 {
 	Items.FindOrAdd(Id) += Quantity;
+
+	DebugInventory();
 }
 
+void UInventoryComponent::DebugInventory()
+{
+	UE_LOG(LogTemp, Warning, TEXT("===== Inventaire ====="));
+
+	for (auto& Elem : Items)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s : %d"), *Elem.Key.ToString(), Elem.Value);
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("====================="));
+}

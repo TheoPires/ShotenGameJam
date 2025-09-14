@@ -103,26 +103,21 @@ void AShotenGameJamCharacter::Look(const FInputActionValue& Value)
 
 void AShotenGameJamCharacter::Interact(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Interacting");
-	
 	if (Controller == nullptr)
 	{
 		return;
 	}
 
-	// Obtenir la caméra (ajustez selon votre setup)
 	UCameraComponent* Camera = FindComponentByClass<UCameraComponent>();
 	if (!Camera)
 		return;
 
-	// Position et direction depuis la caméra
 	FVector CameraLocation = Camera->GetComponentLocation();
 	FVector CameraForward = Camera->GetForwardVector();
     
 	float TraceDistance = 10000.0f;
 	FVector TraceEnd = CameraLocation + (CameraForward * TraceDistance);
 
-	// Line trace
 	FHitResult HitResult;
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.AddIgnoredActor(this);
@@ -137,13 +132,11 @@ void AShotenGameJamCharacter::Interact(const FInputActionValue& Value)
 		CollisionParams
 	);
 
-	if (bHit)
+	if (bHit && HitResult.GetActor())
 	{
-		// Traitement du hit
-		if (HitResult.GetActor()->Implements<UHarvestable>())
-		{
-			IHarvestable::Execute_Interact(HitResult.GetActor(), this);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Pickup");
-		}
+	    if (HitResult.GetActor()->Implements<UHarvestable>())
+	    {
+	        IHarvestable::Execute_Interact(HitResult.GetActor(), this);
+	    }
 	}
 }

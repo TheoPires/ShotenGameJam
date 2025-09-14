@@ -15,12 +15,26 @@ ABerryBush::ABerryBush()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	SetRootComponent(Mesh);
+
+	BerriesContainer = CreateDefaultSubobject<UStaticMeshComponent>("BerriesContainer");
+	BerriesContainer->SetupAttachment(GetRootComponent());
+	
+	Gatherable = CreateDefaultSubobject<UGatherableComponent>("Gatherable");
+}
+
+void ABerryBush::HiddenBerries()
+{
+	BerriesContainer->SetVisibility(false, true);
+
+	GetWorldTimerManager().SetTimer(RespawnBerriesTimerHandle, this, &ABerryBush::VisibleBerries, DelayToRespawnBerries, false);
 }
 
 // Called when the game starts or when spawned
 void ABerryBush::BeginPlay()
 {
 	Super::BeginPlay();
+
+	BerriesContainer->SetVisibility(true, true);
 	
 }
 
@@ -31,7 +45,7 @@ void ABerryBush::Tick(float DeltaTime)
 
 }
 
-void ABerryBush::Interact(AActor* Interactor)
+void ABerryBush::Interact_Implementation(AActor* Interactor)
 {
 	if (Gatherable)
 	{
@@ -42,5 +56,18 @@ void ABerryBush::Interact(AActor* Interactor)
 		{
 			Character->Inventory->AddItem(FName("Berry"), Got);
 		}
+	
+		HiddenBerries();
 	}
+}
+
+FText ABerryBush::GetInteractionText_Implementation() const
+{
+	return FText::FromString("Cueillir des baies");
+}
+
+void ABerryBush::VisibleBerries()
+{
+	GetWorldTimerManager().ClearTimer(RespawnBerriesTimerHandle);
+	BerriesContainer->SetVisibility(true, true);
 }

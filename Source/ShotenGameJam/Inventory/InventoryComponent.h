@@ -28,5 +28,5 @@ public:
 	TMap<FName,int32> Items;
 
 	void AddItem(FName Id, int32 Quantity);
-		
+	void DebugInventory();
 };
