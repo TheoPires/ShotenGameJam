@@ -24,6 +24,7 @@ ABerryBush::ABerryBush()
 
 void ABerryBush::HiddenBerries()
 {
+	bCanBeHarvest = false;
 	BerriesContainer->SetVisibility(false, true);
 
 	GetWorldTimerManager().SetTimer(RespawnBerriesTimerHandle, this, &ABerryBush::VisibleBerries, DelayToRespawnBerries, false);
@@ -47,6 +48,11 @@ void ABerryBush::Tick(float DeltaTime)
 
 void ABerryBush::Interact_Implementation(AActor* Interactor)
 {
+	if (!bCanBeHarvest)
+	{
+		return;		
+	}
+	
 	if (Gatherable)
 	{
 		int32 Got = Gatherable->Gather(Interactor);
@@ -68,6 +74,7 @@ FText ABerryBush::GetInteractionText_Implementation() const
 
 void ABerryBush::VisibleBerries()
 {
+	bCanBeHarvest = true;
 	GetWorldTimerManager().ClearTimer(RespawnBerriesTimerHandle);
 	BerriesContainer->SetVisibility(true, true);
 }
