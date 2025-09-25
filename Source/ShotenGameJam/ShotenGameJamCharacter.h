@@ -76,5 +76,8 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Inventory")
 	class UInventoryComponent* Inventory = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Survival")
+	class USurvivalStatsComponent* SurvivalStats = nullptr;
 };
 

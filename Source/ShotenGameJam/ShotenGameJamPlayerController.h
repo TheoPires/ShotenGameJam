@@ -28,4 +28,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// End Actor interface
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI")
+	TSubclassOf<class UUserWidget> SurvivalUIClass;
 };
