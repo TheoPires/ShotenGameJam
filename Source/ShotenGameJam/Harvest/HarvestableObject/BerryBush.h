@@ -43,6 +43,4 @@ protected:
 	
 	UPROPERTY(EditAnywhere)
 	float DelayToRespawnBerries = 5.0f;
-
-	bool bCanBeHarvest = true;
 };

@@ -68,8 +68,8 @@ int32 UGatherableComponent::Gather(AActor* Interactor)
 
 		GetWorld()->GetTimerManager().SetTimer(RespawnTimerHandle, this, &UGatherableComponent::Respawn, RespawnTimer, false);
 	}
-
-	return FMath::RandRange(1, 3);
+	--CurrentAmount;
+	return FMath::RandRange(1, MaxItemGathered);
 }
 
 

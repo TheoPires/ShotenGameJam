@@ -37,6 +37,9 @@ public:
 	FName ItemId = "DefaultItem";
 
 	UPROPERTY(EditAnywhere)
+	int32 MaxItemGathered = 3;
+	
+	UPROPERTY(EditAnywhere)
 	int32 MaxAmount = 3;
 
 	UPROPERTY(EditAnywhere)
