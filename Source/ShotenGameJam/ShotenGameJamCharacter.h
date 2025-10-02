@@ -47,10 +47,10 @@ public:
 		
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* LookAction;
+	UInputAction* LookAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* InteractAction;
+	UInputAction* InteractAction;
 
 protected:
 	/** Called for movement input */
@@ -76,5 +76,11 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Inventory")
 	class UInventoryComponent* Inventory = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Survival")
+	class UHungerStatsComponent* HungerStats = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Survival")
+	class UThirstyStatsComponent* ThirstyStats = nullptr;
 };
 

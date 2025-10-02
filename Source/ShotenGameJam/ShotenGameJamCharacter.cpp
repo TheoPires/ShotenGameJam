@@ -12,6 +12,8 @@
 #include "Engine/LocalPlayer.h"
 #include "Harvest/Harvestable.h"
 #include "Inventory/InventoryComponent.h"
+#include "Survival/HungerStatsComponent.h"
+#include "Survival/Thirsty/ThirstyStatsComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -40,6 +42,9 @@ AShotenGameJamCharacter::AShotenGameJamCharacter()
 
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 
+	HungerStats = CreateDefaultSubobject<UHungerStatsComponent>(TEXT("HungerStats"));
+	
+	ThirstyStats = CreateDefaultSubobject<UThirstyStatsComponent>(TEXT("ThirstyStats"));
 }
 
 void AShotenGameJamCharacter::BeginPlay()
