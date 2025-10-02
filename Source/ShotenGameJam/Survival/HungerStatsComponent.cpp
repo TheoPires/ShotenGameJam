@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "SurvivalStatsComponent.h"
+#include "HungerStatsComponent.h"
 
 // Sets default values for this component's properties
-USurvivalStatsComponent::USurvivalStatsComponent()
+UHungerStatsComponent::UHungerStatsComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -15,39 +15,39 @@ USurvivalStatsComponent::USurvivalStatsComponent()
 
 
 // Called when the game starts
-void USurvivalStatsComponent::BeginPlay()
+void UHungerStatsComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 	GetWorld()->GetTimerManager().SetTimer(
 		HungerTimerHandle,
 		this,
-		&USurvivalStatsComponent::DecreaseHunger,
+		&UHungerStatsComponent::DecreaseHunger,
 		HungerDecreaseRate,
 		true);
 }
 
 
 // Called every frame
-void USurvivalStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UHungerStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
 }
 
-float USurvivalStatsComponent::GetHungerPercent() const
+float UHungerStatsComponent::GetHungerPercent() const
 {
     return (MaxHunger > 0.0f) ? Hunger / MaxHunger : 0.0f;
 }
 
-void USurvivalStatsComponent::AddHungerValue(const int& HungerValue)
+void UHungerStatsComponent::AddHungerValue(const int& HungerValue)
 {
 	Hunger += HungerValue;
 	OnHungerUpdated.Broadcast(Hunger, GetHungerPercent());
 }
 
-void USurvivalStatsComponent::DecreaseHunger()
+void UHungerStatsComponent::DecreaseHunger()
 {
 	Hunger = FMath::Clamp(Hunger - HungerDecreaseAmount, 0.0f, MaxHunger);
 	

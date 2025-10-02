@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "SurvivalStatsComponent.generated.h"
+#include "HungerStatsComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHungerUpdated, float, HungerValue, float, HungerPercentage);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class SHOTENGAMEJAM_API USurvivalStatsComponent : public UActorComponent
+class SHOTENGAMEJAM_API UHungerStatsComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	USurvivalStatsComponent();
+	UHungerStatsComponent();
 
 protected:
 	// Called when the game starts
